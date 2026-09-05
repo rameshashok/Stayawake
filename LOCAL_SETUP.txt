@@ -1,0 +1,94 @@
+Stayawake - Local Setup Procedure
+=================================
+
+1. Clone the repository
+
+Open PowerShell and run:
+
+    git clone https://github.com/revathireashma/Stayawake.git
+    cd Stayawake
+
+
+2. Install uv (if it is not already installed)
+
+    winget install --id=astral-sh.uv -e
+
+Close and reopen PowerShell after installation if the uv command is not found.
+
+
+3. Create a Python 3.13 virtual environment
+
+TensorFlow requires Python 3.13 or earlier. Use Python 3.13 for this project:
+
+    uv venv .venv313 --python 3.13
+
+
+4. Install the project dependencies
+
+    uv pip install --python .venv313\Scripts\python.exe numpy pandas joblib scikit-learn tensorflow matplotlib
+
+
+5. Select the Python interpreter in VS Code
+
+In VS Code:
+
+    Ctrl+Shift+P
+    Python: Select Interpreter
+    Choose .venv313\Scripts\python.exe
+
+
+6. Generate the dataset
+
+Run this command from the Stayawake folder:
+
+    uv run --python .venv313\Scripts\python.exe data_generation.py
+
+This creates:
+
+    data\driver_drowsiness.csv
+
+The dataset is already included in the repository, so this step is only needed
+when regenerating it.
+
+
+7. Train the model
+
+    uv run --python .venv313\Scripts\python.exe train_model.py
+
+This creates or updates:
+
+    model\drowsiness_model.keras
+    model\scaler.pkl
+
+The trained model files are already included in the repository.
+
+
+8. Evaluate the model
+
+    uv run --python .venv313\Scripts\python.exe evaluate_model.py
+
+This creates:
+
+    model\confusion_matrix.png
+
+
+9. Update the local copy later
+
+From inside the Stayawake folder:
+
+    git pull origin master
+
+
+10. Check the repository status
+
+    git status
+
+
+Important notes
+---------------
+
+- Do not commit .venv or .venv313. They are excluded by .gitignore.
+- Run all commands from the Stayawake project folder.
+- If VS Code reports missing imports, select .venv313\Scripts\python.exe again.
+- TensorFlow may display a warning about GPU support on native Windows. CPU
+  training and evaluation still work.
