@@ -1,0 +1,20 @@
+services:
+  generate:
+    build: .
+    volumes:
+      - ./data:/app/data
+    command: python src/data_generation.py
+
+  train:
+    build: .
+    volumes:
+      - ./data:/app/data
+      - ./model:/app/model
+    command: python src/train.py
+
+  evaluate:
+    build: .
+    volumes:
+      - ./data:/app/data
+      - ./model:/app/model
+    command: python src/evaluate.py

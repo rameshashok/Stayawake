@@ -1,5 +1,8 @@
 .venv313/
 model/drowsiness_model.keras
 model/scaler.pkl
+model/report.html
 __pycache__/
 *.pyc
+*.egg-info/
+.env

@@ -1,0 +1,7 @@
+.venv313/
+.git/
+.vscode/
+__pycache__/
+*.pyc
+data/
+model/
